@@ -1,3 +1,4 @@
+/* CLEANED BY CHATGPT BUT UNEDITED */
 html {
   margin: 0;
   padding: 0;
@@ -5,7 +6,25 @@ html {
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to bottom, #6866FE, #FD6666);
+  background-image: linear-gradient(
+    to bottom,
+    #6866FE,
+    #7a72f9,
+    #8d7df2,
+    #a089eb,
+    #b294e5,
+    #c59fdf,
+    #d7abd9,
+    #eab6d3,
+    #fbc2cd,
+    #fd9aa1,
+    #fd837d,
+    #fd6666
+  );
+  background-size: 100% 1000%;
+  background-position: center 0%;
+  background-repeat: no-repeat;
+  transition: background-position 0.05s ease-out;
 }
 
 .head p {
@@ -99,34 +118,7 @@ body {
   background-color: #c62828;
 }
 
-#gradient-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background-image: linear-gradient(
-    to bottom,
-    #6866FE,
-    #7a72f9,
-    #8d7df2,
-    #a089eb,
-    #b294e5,
-    #c59fdf,
-    #d7abd9,
-    #eab6d3,
-    #fbc2cd,
-    #fd9aa1,
-    #fd837d,
-    #fd6666
-  );
-  background-size: 100% 1000%;
-  background-position: center 0%;
-  background-repeat: no-repeat;
-  transition: background-position 0.05s ease-out;
-}
-
+/* === Gradient Slider Styles === */
 .slider-container {
   position: fixed;
   right: 20px;
