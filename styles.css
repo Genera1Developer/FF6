@@ -83,7 +83,7 @@ body {
       margin-top: 15px;
       border: none;
       border-radius: 5px;
-      background-color: #00c9a7;
+      background-color: rgba(255, 255, 255, 0.1);
       color: #fff;
       font-size: 16px;
       cursor: pointer;
@@ -95,7 +95,7 @@ body {
     }
 
     .signup button[type="reset"] {
-      background-color: #f44336;
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
     .signup button[type="reset"]:hover {
