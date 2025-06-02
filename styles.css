@@ -3,6 +3,8 @@ html, body {
       padding: 0;
       height: 100%;
       overflow: hidden;
+      justify-content: center;
+      align-items: center;
       background-image: linear-gradient(to bottom, #6866FE, #FD6666);
 
 p {
@@ -25,7 +27,7 @@ h1 {
       border-radius: 10px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       /* max-width: 300px */
-      width: 100%; /* fix overflow */
+      width: 90%; /* fix overflow */
     }
 
     .signup form {
