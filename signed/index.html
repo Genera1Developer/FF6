@@ -12,7 +12,7 @@
       <p><i>Welcome, <span id="username"></span></i></p>
       <script> // ‼️ JAVA BY CHATGPT BECAUSE I DO NOT KNOW JAVA
         const params = new URLSearchParams(location.search);
-        document.getElementById("username").textContent = params.get("name") || "Guest"
+        document.getElementById("username").textContent = params.get("name") || "Anonymous" // Changed By Me From "Guest" to "Anonymous"
       </script>
     </div>
   </body>
