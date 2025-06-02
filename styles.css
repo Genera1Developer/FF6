@@ -3,7 +3,7 @@ html, body {
       padding: 0;
       height: 100%;
       overflow: hidden;
-      background-image: linear-gradient(to bottom, #00008b, #000035, #000000, #400001, #A40505);
+      background-image: linear-gradient(to bottom, #00008b, #000035, #8940BE, #400001, #A40505);
     }
 
 p {
