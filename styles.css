@@ -23,7 +23,7 @@ h1 {
       padding: 30px 40px;
       border-radius: 10px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      max-width: 200px; /* fix overflow */
+      max-width: 300px; /* fix overflow */
       width: 75%; /* fix overflow */
     }
 
