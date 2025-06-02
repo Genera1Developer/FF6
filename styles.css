@@ -1,12 +1,21 @@
-html, body {
+html {
   margin: 0;
   padding: 0;
   height: 100%;
   overflow: hidden;
-  display: flex; /* Holy shit did this make everything harder */
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(to bottom, #6866FE, #FD6666);
+}
+
+body {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
 p {
