@@ -8,14 +8,17 @@ html {
   background-image: linear-gradient(to bottom, #6866FE, #FD6666);
 }
 
-body {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
+.head p {
+  font-family: Mono-Sans;
+  font-style: italic;
+  text-align: center;
+  color: white;
+}
+
+.head h1 {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
 }
 
 p {
@@ -29,6 +32,16 @@ h1 {
   font-family: Arial, sans-serif;
   text-align: center;
   color: white;
+}
+
+body {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
 .signup {
