@@ -3,7 +3,7 @@ html, body {
       padding: 0;
       height: 100%;
       overflow: hidden;
-      background-image: linear-gradient(to bottom, #0401F7, #6D82EA, #9B6DEA, #EA6D6D, #F70100);
+      background-image: linear-gradient(to bottom, #6866FE, #FD6666);
 
 p {
       font-family: Mono-Sans;
