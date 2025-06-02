@@ -1,24 +1,28 @@
-<html>
+<html lang="en"> <!-- ‼️ Only Cleaned By ChatGPT But Un-Edited ‼️ -->
   <head>
     <title>FF6 | You</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../styles.css">
-    <meta name="description" content="Signed In | FF6">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../styles.css" />
+    <meta name="description" content="Signed In | FF6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div class=head>
+    <div class="head">
       <h1>Home</h1>
       <p><i>Welcome, <span id="username"></span></i></p>
-      <script> // ‼️ JAVA BY CHATGPT BECAUSE I DO NOT KNOW JAVA
-        const params = new URLSearchParams(location.search);
-        document.getElementById("username").textContent = params.get("name") || "Anonymous" // Changed By Me From "Guest" to "Anonymous"
-      </script>
     </div>
+
     <div id="gradient-background"></div>
+
     <div class="slider-container">
-      <input type="range" id="gradientSlider" min="0" max="100" value="0">
+      <input type="range" id="gradientSlider" min="0" max="100" value="0" />
     </div>
-    <script src="gradient.js"></script> <!-- ‼️ JAVA BY CHATGPT BECAUSE I DO NOT KNOW JAVA -->
+
+    <script src="gradient.js"></script>
+    <script>
+      const params = new URLSearchParams(location.search);
+      document.getElementById("username").textContent =
+        params.get("name") || "Anonymous";
+    </script>
   </body>
 </html>
