@@ -9,7 +9,11 @@
   <body>
     <div class=head>
       <h1>Home</h1>
-      <p><i>Welcome, <name></name></i></p>
+      <p><i>Welcome, <span id="username"></span></i></p>
+      <script> // ‼️ JAVA BY CHATGPT BECAUSE I DO NOT KNOW JAVA
+        const params = new URLSearchParams(location.search);
+        document.getElementById("username").textContent = params.get("name") || "Guest"
+      </script>
     </div>
   </body>
 </html>
