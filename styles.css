@@ -2,6 +2,7 @@ html, body {
       margin: 0;
       padding: 0;
       height: 100%;
+      display: flex;
       overflow: hidden;
       justify-content: center;
       align-items: center;
@@ -28,6 +29,7 @@ h1 {
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       /* max-width: 300px */
       width: 90%; /* fix overflow */
+      box-sizing: border-box;
     }
 
     .signup form {
