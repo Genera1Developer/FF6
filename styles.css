@@ -18,6 +18,11 @@ h1 {
       color: white;
 }
 
-signup {
+.signup {
       align-items: center;
+}
+
+input {
+      font-family: Lucida Console;
+      text-align: center;
 }
