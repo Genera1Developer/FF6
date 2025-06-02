@@ -11,10 +11,13 @@
       <h1>Home</h1>
       <p><i>Welcome, <span id="username"></span></i></p>
     </div>
-    <div class="slider-container">
-      <input type="range" id="gradientSlider" min="0" max="100" value="0" />
-    </div>
-    <script src="gradient.js" defer></script>
+    <div class="custom-slider" id="customSlider">
+  <div class="slider-track">
+    <div class="slider-thumb" id="sliderThumb"></div>
+  </div>
+</div>
+
+<script src="./gradient.js"></script>
     <script>
       const params = new URLSearchParams(location.search);
       document.getElementById("username").textContent =
