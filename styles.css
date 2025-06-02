@@ -118,7 +118,6 @@ body {
   background-color: #c62828;
 }
 
-/* === Gradient Slider Styles === */
 .slider-container {
   position: fixed;
   right: 20px;
@@ -127,17 +126,24 @@ body {
   z-index: 10;
 }
 
+.slider-wrapper { /* fake vertical bc shitty iOS */
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center;
+  z-index: 10;
+}
+
 #gradientSlider {
-  writing-mode: bt-lr;
-  -webkit-appearance: slider-vertical;
-  width: 16px;
-  height: 300px;
-  transform: rotate(180deg);
+  -webkit-appearance: none;
+  appearance: none;
+  width: 300px;
+  height: 16px;
+  background: linear-gradient(to right, #fd6666, #6866FE);
   border-radius: 10px;
-  background: linear-gradient(to top, #fd6666, #6866FE);
-  cursor: pointer;
   outline: none;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 #gradientSlider::-webkit-slider-thumb {
