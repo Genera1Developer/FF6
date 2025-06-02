@@ -123,18 +123,18 @@ body {
   position: fixed;
   right: 20px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center;
   z-index: 10;
 }
 
 #gradientSlider {
-  writing-mode: bt-lr;
-  -webkit-appearance: slider-vertical;
-  width: 16px;
-  height: 300px;
-  transform: rotate(180deg);
+  -webkit-appearance: none;
+  width: 300px;
+  height: 16px;
+  transform: rotate(-90deg); /* visually vertical */
   border-radius: 10px;
-  background: linear-gradient(to top, #fd6666, #6866FE);
+  background: linear-gradient(to left, #fd6666, #6866FE);
   cursor: pointer;
   outline: none;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
