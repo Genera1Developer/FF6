@@ -224,9 +224,12 @@ body {
 
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .image-grid img {
@@ -234,6 +237,8 @@ body {
   height: auto;
   border-radius: 8px;
   transition: transform 0.2s ease-in-out;
+  display: block;
+  object-fit: cover;
 }
 
 .image-grid img:hover {
