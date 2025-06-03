@@ -2,27 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FF6 Multi-Engine Crawler</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FF6 Sector 1</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="head">
-    <h1>FF6 Multi-Search</h1>
-    <p>Search across DuckDuckGo, Brave, and more</p>
-  </div>
+  <div class="container">
+    <div class="head">
+      <h1>FF6 | Sector Search</h1>
+      <p>Search across Google, Bing, DuckDuckGo, and more.</p>
+    </div>
 
-  <div class="signup">
     <form id="searchForm">
-      <label for="query">Search Query</label>
-      <input type="text" id="query" required placeholder="Enter search term..." />
+      <input type="text" id="query" placeholder="Enter search term" required />
       <button type="submit">Search</button>
     </form>
-    <button id="addTabBtn">➕ New Tab</button>
-  </div>
 
-  <div id="tabs"></div>
-  <div id="results"></div>
+    <div id="resultsContainer"></div>
+  </div>
 
   <script src="blocklist.js"></script>
   <script src="engines.js"></script>
