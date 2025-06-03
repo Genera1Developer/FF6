@@ -4,6 +4,7 @@ html {
   height: 100%;
   background-image: linear-gradient(to bottom, #6866FE, #FD6666);
   overflow: hidden;
+  width: 100%;
 }
 
 body {
