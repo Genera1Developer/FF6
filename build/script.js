@@ -1,3 +1,15 @@
+document.addEventListener("DOMContentLoaded", () => {
+  loadTabs();
+  loadLastQuery();
+});
+
+let currentMode = "all";
+
+document.getElementById("modeSwitch").addEventListener("click", () => {
+  currentMode = currentMode === "all" ? "images" : "all";
+  document.getElementById("modeSwitch").textContent = currentMode === "all" ? "Switch to Images" : "Switch to All";
+});
+
 document.getElementById("searchForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -7,62 +19,57 @@ document.getElementById("searchForm").addEventListener("submit", async function 
     return;
   }
 
+  saveTab(query);
+  saveLastQuery(query);
+
   const resultsContainer = document.getElementById("resultsContainer");
   const summaryContainer = document.getElementById("summaryContainer");
-  const imagesContainer = document.getElementById("imagesContainer");
+
   resultsContainer.innerHTML = "<p>Loading...</p>";
   summaryContainer.innerHTML = "";
-  imagesContainer.innerHTML = "";
 
   const allResults = [];
-  const allImages = [];
 
   for (const engine of ENGINES) {
     try {
-      const html = await fetch(`https://corsproxy.io/?${engine.url(query)}`).then(r => r.text());
+      const response = await fetch(`https://corsproxy.io/?${engine.url(query)}`);
+      const html = await response.text();
       const doc = new DOMParser().parseFromString(html, "text/html");
-      const results = engine.parser(doc);
-      const images = engine.imageParser ? engine.imageParser(doc) : [];
+      const results = currentMode === "all" ? engine.parser(doc) : engine.imageParser ? engine.imageParser(doc) : [];
       allResults.push(...results);
-      allImages.push(...images);
     } catch (err) {
       console.error("Error fetching from", engine.name, err);
     }
   }
 
-  const filteredResults = allResults.slice(2, allResults.length - 13);
-  if (filteredResults.length === 0) {
+  if (allResults.length === 0) {
     resultsContainer.innerHTML = "<p>No results found or blocked by CORS.</p>";
+    return;
+  }
+
+  if (currentMode === "images") {
+    resultsContainer.innerHTML = `<div class="image-grid">${allResults.map(img => `
+      <a href="${img.href}" target="_blank">
+        <img src="${img.href}" alt="result image">
+      </a>
+    `).join("")}</div>`;
   } else {
-    resultsContainer.innerHTML = filteredResults.map(res => `
+    resultsContainer.innerHTML = allResults.map(res => `
       <div class="result-card">
         <a href="${res.href}" target="_blank">${res.title}</a>
         <p>${res.desc}</p>
         <div class="result-source">${res.source}</div>
       </div>
     `).join("");
-  }
 
-  if (allImages.length > 0) {
-    imagesContainer.innerHTML = `<h3>Images</h3><div class="image-grid">` + allImages.map(src => `
-      <img src="${src}" loading="lazy">
-    `).join("") + `</div>`;
-  }
-
-  try {
-    const duckduckHTML = await fetch(`https://corsproxy.io/?https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`).then(r => r.text());
-    const duckDoc = new DOMParser().parseFromString(duckduckHTML, "text/html");
-    const snippet = duckDoc.querySelector(".result__snippet");
-    if (snippet) {
-      summaryContainer.innerHTML = `<p>${snippet.textContent}</p>`;
-    } else {
-      summaryContainer.innerHTML = `<p>No summary found.</p>`;
+    try {
+      const duck = await fetch(`https://corsproxy.io/?https://html.duckduckgo.com/html?q=${encodeURIComponent(query)}`);
+      const html = await duck.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const snippet = doc.querySelector(".module--about .module__text, .result__snippet");
+      summaryContainer.innerHTML = snippet ? `<p>${snippet.textContent.trim()}</p>` : "<p>No summary found.</p>";
+    } catch {
+      summaryContainer.innerHTML = "<p>Could not load summary.</p>";
     }
-  } catch (err) {
-    summaryContainer.innerHTML = `<p>Could not load summary.</p>`;
   }
 });
-
-function isBlocked(query) {
-  return BLOCKED_WORDS.some(word => query.toLowerCase().includes(word.toLowerCase()));
-}
