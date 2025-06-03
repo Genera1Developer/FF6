@@ -1,13 +1,34 @@
 const ENGINES = [
   {
+    name: "Google",
+    url: q => `https://www.google.com/webhp?igu=1&hl=en&gl=us&q=${encodeURIComponent(q)}`,
+    parser: doc => {
+      const cards = [];
+      const results = doc.querySelectorAll("a");
+      results.forEach(link => {
+        const href = link.href;
+        const title = link.textContent.trim();
+        if (href.startsWith("http") && title.length > 10 && !href.includes("/search?")) {
+          cards.push({
+            title: title,
+            href: href,
+            desc: "",
+            source: "From Google"
+          });
+        }
+      });
+      return cards;
+    }
+  },
+  {
     name: "DuckDuckGo",
     url: q => `https://html.duckduckgo.com/html/?q=${encodeURIComponent(q)}`,
-    parser: doc => [...doc.querySelectorAll(".result__url")]
+    parser: doc => [...doc.querySelectorAll(".result__title a")]
       .map(link => ({
-        title: link.closest(".result")?.querySelector(".result__title")?.textContent || link.href,
+        title: link.textContent,
         href: link.href,
         desc: link.closest(".result")?.querySelector(".result__snippet")?.textContent || "",
-        source: "DuckDuckGo"
+        source: "From DuckDuckGo"
       }))
   },
   {
@@ -19,7 +40,7 @@ const ENGINES = [
         title: link.textContent,
         href: link.href,
         desc: "",
-        source: "Brave"
+        source: "From Brave"
       }))
   }
 ];
