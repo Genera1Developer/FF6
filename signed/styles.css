@@ -1,0 +1,106 @@
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to bottom, #6866FE, #FD6666);
+}
+
+.head p {
+  font-family: Mono-Sans;
+  font-style: italic;
+  text-align: center;
+  color: white;
+}
+
+.head h1 {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+p {
+  font-family: Mono-Sans;
+  font-style: italic;
+  text-align: center;
+  color: white;
+}
+
+h1 {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+/* start sign up container shit */
+.signup {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 400px;
+  box-sizing: border-box;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.signup form {
+  display: flex;
+  flex-direction: column;
+}
+
+    .signup input[type="text"] {
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      font-size: 16px;
+      background-color: #f2f2f2;
+      color: #333;
+    }
+
+    .signup label {
+      margin: 10px 0 5px;
+    }
+
+/*    .signup input[type="radio"] {
+      margin-right: 8px;
+    } */
+
+    .signup button {
+      padding: 10px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .signup button:hover {
+      background-color: #007b8a;
+    }
+
+    .signup button[type="reset"] {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .signup button[type="reset"]:hover {
+      background-color: #c62828;
+    }
+      /* end signup container shit */
