@@ -18,7 +18,10 @@ const ENGINES = [
         }
       });
       return cards;
-    }
+    },
+    imageParser: doc => [...doc.querySelectorAll("img")].map(img => ({
+      href: img.src
+    })).filter(img => img.href && img.href.startsWith("http") && !img.href.includes("logo"))
   },
   {
     name: "DuckDuckGo",
@@ -29,7 +32,10 @@ const ENGINES = [
         href: link.href,
         desc: link.closest(".result")?.querySelector(".result__snippet")?.textContent || "",
         source: "From DuckDuckGo"
-      }))
+      })),
+    imageParser: doc => [...doc.querySelectorAll("img")].map(img => ({
+      href: img.src
+    })).filter(img => img.href && img.href.startsWith("http") && !img.href.includes("logo"))
   },
   {
     name: "Brave",
@@ -41,6 +47,9 @@ const ENGINES = [
         href: link.href,
         desc: "",
         source: "From Brave"
-      }))
+      })),
+    imageParser: doc => [...doc.querySelectorAll("img")].map(img => ({
+      href: img.src
+    })).filter(img => img.href && img.href.startsWith("http") && !img.href.includes("logo"))
   }
 ];
