@@ -1,33 +1,50 @@
-
-const resultsWeb = document.getElementById("results-web");
-const resultsImages = document.getElementById("results-images");
-
 function switchTab(tab) {
-  resultsWeb.style.display = tab === "Web" ? "block" : "none";
-  resultsImages.style.display = tab === "Images" ? "block" : "none";
-  document.querySelectorAll(".tabs button").forEach(btn => btn.classList.remove("active"));
+  document.getElementById("results-web").style.display = tab === "web" ? "block" : "none";
+  document.getElementById("results-images").style.display = tab === "images" ? "block" : "none";
   document.querySelectorAll(".tabs button").forEach(btn => {
-    if (btn.textContent === tab) btn.classList.add("active");
+    btn.classList.remove("active");
+  });
+  document.getElementById(`tab-${tab}`).classList.add("active");
+  localStorage.setItem("tab", tab);
+}
+
+function searchAll(e) {
+  e.preventDefault();
+  const query = document.getElementById("query").value.trim();
+  if (!query || isBlocked(query)) {
+    alert("Blocked or empty search.");
+    return;
+  }
+
+  const fakeEngines = ["Google", "Bing", "DuckDuckGo", "Yandex", "Ecosia", "Brave"];
+  const resultsWeb = document.getElementById("results-web");
+  const resultsImages = document.getElementById("results-images");
+
+  resultsWeb.innerHTML = "";
+  resultsImages.innerHTML = "";
+
+  fakeEngines.forEach(engine => {
+    // Web result
+    resultsWeb.innerHTML += `
+      <div class="result">
+        <a href="https://${engine.toLowerCase()}.com/search?q=${encodeURIComponent(query)}" target="_blank">
+          <h2>${query} - from ${engine}</h2>
+        </a>
+        <p>This is a mock description from ${engine}.</p>
+        <p class="source">${engine}</p>
+      </div>`;
+
+    // Image result
+    resultsImages.innerHTML += `
+      <div class="result">
+        <img src="https://placekitten.com/300/200" alt="${query}" style="max-width: 100%; border-radius: 10px;" />
+        <p>${query} image result from ${engine}</p>
+        <p class="source">${engine}</p>
+      </div>`;
   });
 }
 
-async function search(event) {
-  event.preventDefault();
-  const query = document.getElementById("query").value;
-  const webRes = await fetch(`http://localhost:4567/search?q=${encodeURIComponent(query)}&type=web`).then(r => r.json());
-  const imgRes = await fetch(`http://localhost:4567/search?q=${encodeURIComponent(query)}&type=images`).then(r => r.json());
-
-  resultsWeb.innerHTML = webRes.map(r => `
-    <div class="signup">
-      <a href="${r.url}" target="_blank"><h2>${r.title}</h2></a>
-      <p>${r.description}</p>
-      <p class="source">Source: ${r.source}</p>
-    </div>`).join("");
-
-  resultsImages.innerHTML = imgRes.map(r => `
-    <div class="signup">
-      <img src="${r.url}" alt="${r.title}" style="max-width:100%;border-radius:10px;">
-      <p>${r.title}</p>
-      <p class="source">Source: ${r.source}</p>
-    </div>`).join("");
-}
+window.onload = () => {
+  const savedTab = localStorage.getItem("tab") || "web";
+  switchTab(savedTab);
+};
