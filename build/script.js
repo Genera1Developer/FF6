@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // Strip bad results
+    // Strip unnecessary google and brave results so less length
     const filtered = allResults.slice(2, -13); // Remove first 2 and last 13
     if (filtered.length === 0) {
       resultsContainer.innerHTML = "<p>No results found or blocked by CORS.</p>";
