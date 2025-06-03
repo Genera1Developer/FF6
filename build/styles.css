@@ -1,36 +1,94 @@
-.tabs {
-  display: flex;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: auto;
   justify-content: center;
-  margin-top: 20px;
-  gap: 10px;
+  align-items: center;
+  background-image: linear-gradient(to bottom, #6866FE, #FD6666);
+  font-family: Arial, sans-serif;
 }
 
-.tabs button {
-  background-color: rgba(255, 255, 255, 0.2);
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+.head h1, .head p {
+  text-align: center;
   color: white;
+}
+
+.signup {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px 40px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  margin: 10px auto;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.signup form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup input[type="text"] {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.signup button {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.tabs button.active {
+.signup button:hover {
   background-color: #007b8a;
 }
 
-.results-tab {
-  margin-top: 20px;
-  padding: 20px;
+#results {
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 10px;
 }
 
-.signup .result {
-  margin-top: 20px;
-  background-color: rgba(255, 255, 255, 0.1);
+.result-card {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.signup .source {
-  font-size: 12px;
-  color: #ccc;
+.result-card small {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.8em;
+  color: #ddd;
+}
+
+#tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.tab {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 5px 10px;
+  margin: 3px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #444;
 }
