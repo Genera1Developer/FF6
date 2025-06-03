@@ -8,6 +8,7 @@ html {
   background-size: cover;
   overflow-x: hidden;
   width: 100%;
+  box-sizing: border-box;
 }
 
 body {
@@ -16,6 +17,7 @@ body {
   min-height: 100%;
   font-family: Arial, sans-serif;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .head h1, .head p, p, h1 {
@@ -32,6 +34,7 @@ body {
   width: 90%;
   max-width: 400px;
   margin: 30px auto;
+  box-sizing: border-box;
 }
 
 .signup form {
@@ -48,6 +51,7 @@ body {
   font-size: 16px;
   background-color: #f2f2f2;
   color: #333;
+  box-sizing: border-box;
 }
 
 .signup button {
@@ -69,6 +73,7 @@ body {
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .result-card {
@@ -78,6 +83,7 @@ body {
   border-radius: 10px;
   color: white;
   backdrop-filter: blur(5px);
+  box-sizing: border-box;
 }
 
 .result-card a {
@@ -105,6 +111,7 @@ body {
   border-radius: 10px;
   color: white;
   font-style: italic;
+  box-sizing: border-box;
 }
 
 #toggleTabs {
@@ -137,6 +144,7 @@ body {
   overflow-y: auto;
   z-index: 998;
   display: none;
+  box-sizing: border-box;
 }
 
 .tabs-header {
