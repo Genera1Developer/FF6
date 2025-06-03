@@ -1,47 +1,56 @@
-const tabsPanel = document.getElementById("tabsPanel");
-const tabList = document.getElementById("tabList");
-const clearTabsBtn = document.getElementById("clearTabs");
-
 function loadTabs() {
-  const savedTabs = JSON.parse(localStorage.getItem("searchTabs") || "[]");
+  const tabs = JSON.parse(localStorage.getItem("searchTabs") || "[]");
+  const tabList = document.getElementById("tabList");
   tabList.innerHTML = "";
-  savedTabs.forEach((tab, index) => {
+  tabs.forEach((tab, i) => {
     const tabEl = document.createElement("div");
     tabEl.className = "tab";
-    tabEl.innerHTML = `<span>${tab}</span><button class="close-tab">&times;</button>`;
-    
-    tabEl.querySelector("span").onclick = () => {
+    tabEl.innerHTML = `<span>${tab}</span><button class="close-tab" data-index="${i}">&times;</button>`;
+    tabEl.querySelector("span").addEventListener("click", () => {
       document.getElementById("query").value = tab;
       document.getElementById("searchForm").dispatchEvent(new Event("submit"));
-    };
-
-    tabEl.querySelector("button").onclick = () => {
-      savedTabs.splice(index, 1);
-      localStorage.setItem("searchTabs", JSON.stringify(savedTabs));
-      loadTabs();
-    };
-
+    });
+    tabEl.querySelector(".close-tab").addEventListener("click", (e) => {
+      e.stopPropagation();
+      deleteTab(i);
+    });
     tabList.appendChild(tabEl);
   });
 }
 
-clearTabsBtn.onclick = () => {
+function deleteTab(index) {
+  const tabs = JSON.parse(localStorage.getItem("searchTabs") || "[]");
+  tabs.splice(index, 1);
+  localStorage.setItem("searchTabs", JSON.stringify(tabs));
+  loadTabs();
+}
+
+function clearTabs() {
   localStorage.removeItem("searchTabs");
   loadTabs();
-};
+}
 
 function saveTab(query) {
   const tabs = JSON.parse(localStorage.getItem("searchTabs") || "[]");
   if (!tabs.includes(query)) {
     tabs.push(query);
     localStorage.setItem("searchTabs", JSON.stringify(tabs));
+    loadTabs();
   }
-  loadTabs();
 }
 
-document.addEventListener("DOMContentLoaded", loadTabs);
-
-document.getElementById("toggleTabs").onclick = () => {
+document.getElementById("toggleTabs").addEventListener("click", () => {
   const panel = document.getElementById("tabsPanel");
   panel.style.display = panel.style.display === "block" ? "none" : "block";
-};
+});
+
+document.getElementById("clearTabs").addEventListener("click", clearTabs);
+
+document.getElementById("addTab").addEventListener("click", () => {
+  const query = prompt("Name your new tab:");
+  if (query) {
+    saveTab(query.trim());
+  }
+});
+
+loadTabs();
