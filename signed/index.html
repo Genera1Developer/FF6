@@ -11,6 +11,13 @@
       <h1>⋆˙⟡𓆝 𓆟 𓆞 𓆝 𓆟 ⟡˙⋆</h1>
       <p><i>Welcome Home, <span id="username"></span></i></p>
     </div>
+    <div class=signup>
+    <form action="/signed" target="_blank">What Name Will You Use Today?<input type="text" name="name" value="" maxlength="20">
+<br>
+<button type="submit">Submit</button>
+<button type="reset">Reset</button>
+</form>
+  </div>
     <script>
       const params = new URLSearchParams(location.search);
       document.getElementById("username").textContent =
