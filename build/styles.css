@@ -1,11 +1,15 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
-  background-image: linear-gradient(to bottom, #6866FE, #FD6666);
-  color: white;
-}
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    height: auto;
+    background-image: linear-gradient(to bottom, #6866FE, #FD6666);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
 
 .container {
   padding: 20px;
@@ -71,4 +75,16 @@ form button:hover {
 .result-source {
   font-size: 12px;
   color: #ccc;
+}
+
+.summary-box {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 20px;
+  color: #fff;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
