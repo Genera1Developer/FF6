@@ -1,50 +1,39 @@
-/* === Base Setup === */
-html, body {
+html {
   margin: 0;
   padding: 0;
-  min-height: 100%;
-  background: linear-gradient(to bottom, #6866FE, #FD6666);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  font-family: Arial, sans-serif;
-  color: white;
-  overflow-x: hidden;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #6866FE, #FD6666);
 }
 
-/* === Headings and Text === */
-.head p,
-p {
-  font-family: Mono-Sans, monospace;
-  font-style: italic;
-  text-align: center;
-  color: white;
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
 }
 
 .head h1,
+.head p,
+p,
 h1 {
-  font-family: Arial, sans-serif;
   text-align: center;
   color: white;
+  font-family: Arial, sans-serif;
 }
 
-/* === Signup Box / Search Container === */
 .signup {
   background-color: rgba(255, 255, 255, 0.1);
   padding: 30px 40px;
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   width: 90%;
-  max-width: 600px;
-  box-sizing: border-box;
-  margin: 40px auto 20px;
-  text-align: center;
+  max-width: 400px;
+  margin: 30px auto;
 }
 
 .signup form {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .signup input[type="text"] {
@@ -56,16 +45,10 @@ h1 {
   font-size: 16px;
   background-color: #f2f2f2;
   color: #333;
-  width: 100%;
-}
-
-.signup label {
-  margin: 10px 0 5px;
 }
 
 .signup button {
   padding: 10px;
-  margin-top: 15px;
   border: none;
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.1);
@@ -73,131 +56,129 @@ h1 {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 100%;
 }
 
 .signup button:hover {
   background-color: #007b8a;
 }
 
-.signup button[type="reset"] {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.signup button[type="reset"]:hover {
-  background-color: #c62828;
-}
-
-/* === Results Card === */
-.result-card {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 15px 20px;
-  margin: 10px auto;
-  width: 90%;
+#resultsContainer {
+  padding: 20px;
   max-width: 800px;
+  margin: 0 auto;
+}
+
+.result-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  margin: 10px 0;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   color: white;
+  backdrop-filter: blur(5px);
 }
 
 .result-card a {
-  color: #00f2ff;
-  font-weight: bold;
   font-size: 18px;
-  text-decoration: none;
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .result-card p {
+  color: #eee;
   font-size: 14px;
-  margin-top: 5px;
-  color: #ddd;
 }
 
 .result-source {
   font-size: 12px;
-  opacity: 0.7;
-  text-align: right;
-  margin-top: 5px;
+  color: #bbb;
+  margin-top: 8px;
 }
 
-/* === Tabs Section === */
-#tabsContainer {
-  position: fixed;
-  right: 0;
-  top: 70px;
-  width: 260px;
+#summaryContainer {
   background-color: rgba(255, 255, 255, 0.1);
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 800px;
+  border-radius: 10px;
+  color: white;
+  font-style: italic;
+}
+
+/* Tabs UI */
+#toggleTabs {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 22px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 999;
+  transition: 0.3s;
+}
+
+#toggleTabs:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+#tabsPanel {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  width: 280px;
+  max-height: 80%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-left: 2px solid white;
   padding: 10px;
   border-radius: 10px 0 0 10px;
-  z-index: 999;
-  backdrop-filter: blur(8px);
+  overflow-y: auto;
+  z-index: 998;
+  display: none;
 }
 
-#tabsList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.tab-item {
+.tabs-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.08);
-  margin: 6px 0;
-  padding: 6px 10px;
-  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+#tabsPanel h3 {
+  font-size: 18px;
+  margin: 0;
   color: white;
-  font-size: 14px;
-  transition: background-color 0.2s;
-  cursor: pointer;
 }
 
-.tab-item:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.tab-item button {
-  background: none;
+#clearTabs {
+  padding: 6px 10px;
+  background: #c62828;
   border: none;
-  color: red;
-  font-weight: bold;
+  color: white;
+  border-radius: 4px;
   cursor: pointer;
-  margin-left: 10px;
-  font-size: 14px;
 }
 
-/* === Tab Control Buttons === */
-#tabControls {
+#tabList .tab {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
-}
-
-#tabControls button {
-  flex: 1;
-  margin: 3px;
-  padding: 6px;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: none;
-  color: white;
-  font-size: 13px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  margin-bottom: 8px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.2s;
 }
 
-#tabControls button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+#tabList .tab:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
-/* === Responsive === */
-@media (max-width: 768px) {
-  #tabsContainer {
-    top: auto;
-    bottom: 0;
-    width: 100%;
-    border-radius: 10px 10px 0 0;
-  }
+.close-tab {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
 }
