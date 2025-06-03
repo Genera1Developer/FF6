@@ -7,10 +7,42 @@ document.getElementById("searchForm").addEventListener("submit", async function 
     return;
   }
 
-  const resultsContainer = document.getElementById("resultsContainer");
-  resultsContainer.innerHTML = "<p>Searching...</p>";
+  async function summaryFromGoogle(query) {
+    const summaryBox = document.getElementById("summaryBox");
+    summaryBox.innerHTML = "<p>Trying to get summary from Google...</p>";
 
-  const allResults = [];
+    try {
+      const html = await fetch(`https://www.google.com/webhp?igu=1&hl=en&gl=us&q=${encodeURIComponent(query)}`, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0'
+        }
+      }).then(r => r.text());
+
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      // Try to find snippet box
+      const snippet = doc.querySelector("div[data-attrid='wa:/description'] span") ||
+                      doc.querySelector(".hgKElc") ||  // General snippet
+                      doc.querySelector("div[data-content-feature='1'] span"); // Sometimes in AI boxes
+
+      if (snippet && snippet.textContent.trim().length > 50) {
+        summaryBox.innerHTML = `<strong>Summary (from Google):</strong><br>${snippet.textContent.trim()}`;
+      } else {
+        summaryBox.innerHTML = `<p><i>No summary found.</i></p>`;
+      }
+    } catch (err) {
+      console.warn("Google summary failed, retrying in a few seconds...");
+      summaryBox.innerHTML = `<p><i>Still working... checking again shortly.</i></p>`;
+
+      // Wait 2 seconds and try again (slow-loading AI responses)
+      setTimeout(() => summaryFromGoogle(query), 2000);
+    }
+  }
+
+  const resultsContainer = document.getElementById("resultsContainer");
+  resultsContainer.innerHTML = "<p>Loading...</p>";
+
+  let allResults = [];
 
   for (const engine of ENGINES) {
     try {
@@ -21,6 +53,9 @@ document.getElementById("searchForm").addEventListener("submit", async function 
     } catch (err) {
       console.error("Error fetching from", engine.name, err);
     }
+  }
+  if (allResults.length > 15) {
+    allResults = allResults.slice(2, -13);
   }
 
   if (allResults.length === 0) {
