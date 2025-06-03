@@ -1,81 +1,78 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("searchForm");
-  const queryInput = document.getElementById("query");
-  const resultsContainer = document.getElementById("resultsContainer");
-  const summaryContainer = document.getElementById("summaryContainer");
+document.getElementById("searchForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const query = document.getElementById("query").value.trim();
+  if (!query) return;
 
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const query = queryInput.value.trim();
-    if (!query || isBlocked(query)) {
-      alert("Invalid or blocked query.");
-      return;
-    }
-
-    resultsContainer.innerHTML = "<p>Loading results...</p>";
-    summaryContainer.innerHTML = "<p>Loading summary...</p>";
-
-    const allResults = [];
-
-    // Load summary
-    try {
-      const ddgSummary = await getDuckDuckGoSummary(query);
-      summaryContainer.innerHTML = ddgSummary || "No summary found.";
-    } catch {
-      try {
-        const googleSummary = await getGoogleSummary(query);
-        summaryContainer.innerHTML = googleSummary || "No summary found.";
-      } catch {
-        summaryContainer.innerHTML = "Could not load summary.";
-      }
-    }
-
-    for (const engine of ENGINES) {
-      try {
-        const html = await fetch(`https://corsproxy.io/?${engine.url(query)}`).then(r => r.text());
-        const doc = new DOMParser().parseFromString(html, "text/html");
-        const results = engine.parser(doc);
-        allResults.push(...results);
-      } catch (err) {
-        console.warn("Error fetching from", engine.name, err);
-      }
-    }
-
-    // Strip bad results
-    const filtered = allResults.slice(2, -13); // Remove first 2 and last 13
-    if (filtered.length === 0) {
-      resultsContainer.innerHTML = "<p>No results found or blocked by CORS.</p>";
-      return;
-    }
-
-    resultsContainer.innerHTML = filtered.map(res => `
-      <div class="result-card">
-        <a href="${res.href}" target="_blank">${res.title}</a>
-        <p>${res.desc}</p>
-        <div class="result-source">${res.source}</div>
-      </div>
-    `).join("");
-  });
-
-  function isBlocked(query) {
-    const blocked = ["porn", "nazi", "child", "exploit", "cp", "illegal", "hentai"];
-    return blocked.some(term => query.toLowerCase().includes(term));
-  }
-
-  async function getDuckDuckGoSummary(query) {
-    const html = await fetch(`https://corsproxy.io/?https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`)
-      .then(r => r.text());
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    const result = doc.querySelector(".result__snippet");
-    return result ? `<div class="summary-box">${result.textContent}</div>` : null;
-  }
-
-  async function getGoogleSummary(query) {
-    const html = await fetch(`https://corsproxy.io/?https://www.google.com/search?q=${encodeURIComponent(query)}`)
-      .then(r => r.text());
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    const summary = doc.querySelector("#rso .VwiC3b");
-    return summary ? `<div class="summary-box">${summary.textContent}</div>` : null;
-  }
+  saveTab(query); 
+  performSearch(query);
 });
+
+function performSearch(query) {
+  document.getElementById("resultsContainer").innerHTML = "";
+  document.getElementById("summaryContainer").innerHTML = `<p>Searching for "${query}"...</p>`;
+
+  const results = [
+    {
+      title: `Google: ${query}`,
+      link: `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+      description: "View search results from Google.",
+      source: "Google"
+    },
+    {
+      title: `Bing: ${query}`,
+      link: `https://www.bing.com/search?q=${encodeURIComponent(query)}`,
+      description: "View search results from Bing.",
+      source: "Bing"
+    },
+    {
+      title: `DuckDuckGo: ${query}`,
+      link: `https://duckduckgo.com/?q=${encodeURIComponent(query)}`,
+      description: "View search results from DuckDuckGo.",
+      source: "DuckDuckGo"
+    },
+    {
+      title: `Ecosia: ${query}`,
+      link: `https://www.ecosia.org/search?q=${encodeURIComponent(query)}`,
+      description: "View search results from Ecosia.",
+      source: "Ecosia"
+    },
+    {
+      title: `Brave: ${query}`,
+      link: `https://search.brave.com/search?q=${encodeURIComponent(query)}`,
+      description: "View search results from Brave.",
+      source: "Brave"
+    },
+    {
+      title: `Yandex: ${query}`,
+      link: `https://yandex.com/search/?text=${encodeURIComponent(query)}`,
+      description: "View search results from Yandex.",
+      source: "Yandex"
+    }
+  ];
+
+  displaySummary(query);
+  displayResults(results);
+}
+
+function displaySummary(query) {
+  const summaryText = `This is a multi-search engine query for: "${query}". Click any result below to open it.`;
+  document.getElementById("summaryContainer").innerHTML = `<p>${summaryText}</p>`;
+}
+
+function displayResults(results) {
+  const container = document.getElementById("resultsContainer");
+  container.innerHTML = "";
+
+  results.forEach((result) => {
+    const card = document.createElement("div");
+    card.className = "result-card";
+
+    card.innerHTML = `
+      <a href="${result.link}" target="_blank">${result.title}</a>
+      <p>${result.description}</p>
+      <div class="result-source">${result.source}</div>
+    `;
+
+    container.appendChild(card);
+  });
+}
