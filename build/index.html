@@ -1,29 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Universal Crawler</title>
+  <title>Crawler</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="signup">
-    <form onsubmit="search(event)">
+    <form onsubmit="searchAll(event)">
       <label for="query">Search</label>
-      <input type="text" id="query" placeholder="Search term..." required />
-      <button type="submit">Search All</button>
+      <input type="text" id="query" placeholder="Search term..." />
+      <button type="submit">Search</button>
     </form>
   </div>
 
-  <div class="tabs" id="tabs">
-    <button class="active" onclick="switchTab('Web')">Web</button>
-    <button onclick="switchTab('Images')">Images</button>
+  <div class="tabs">
+    <button onclick="switchTab('web')" id="tab-web" class="active">Web</button>
+    <button onclick="switchTab('images')" id="tab-images">Images</button>
   </div>
 
   <div id="results-web" class="results-tab"></div>
   <div id="results-images" class="results-tab" style="display:none;"></div>
 
+  <script src="search-config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
