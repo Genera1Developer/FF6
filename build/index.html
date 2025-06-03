@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Universal Crawler</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="signup">
+    <form onsubmit="search(event)">
+      <label for="query">Search</label>
+      <input type="text" id="query" placeholder="Search term..." required />
+      <button type="submit">Search All</button>
+    </form>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button class="active" onclick="switchTab('Web')">Web</button>
+    <button onclick="switchTab('Images')">Images</button>
+  </div>
+
+  <div id="results-web" class="results-tab"></div>
+  <div id="results-images" class="results-tab" style="display:none;"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
