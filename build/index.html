@@ -2,27 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Crawler</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FF6 Multi-Engine Crawler</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="head">
+    <h1>FF6 Multi-Search</h1>
+    <p>Search across DuckDuckGo, Brave, and more</p>
+  </div>
+
   <div class="signup">
-    <form onsubmit="searchAll(event)">
-      <label for="query">Search</label>
-      <input type="text" id="query" placeholder="Search term..." />
+    <form id="searchForm">
+      <label for="query">Search Query</label>
+      <input type="text" id="query" required placeholder="Enter search term..." />
       <button type="submit">Search</button>
     </form>
+    <button id="addTabBtn">➕ New Tab</button>
   </div>
 
-  <div class="tabs">
-    <button onclick="switchTab('web')" id="tab-web" class="active">Web</button>
-    <button onclick="switchTab('images')" id="tab-images">Images</button>
-  </div>
+  <div id="tabs"></div>
+  <div id="results"></div>
 
-  <div id="results-web" class="results-tab"></div>
-  <div id="results-images" class="results-tab" style="display:none;"></div>
-
-  <script src="search-config.js"></script>
+  <script src="blocklist.js"></script>
+  <script src="engines.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
