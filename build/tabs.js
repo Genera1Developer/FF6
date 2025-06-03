@@ -1,56 +1,61 @@
+function saveTab(query) {
+  let tabs = JSON.parse(localStorage.getItem("tabs") || "[]");
+  if (!tabs.includes(query)) {
+    tabs.push(query);
+    localStorage.setItem("tabs", JSON.stringify(tabs));
+    renderTabs();
+  }
+}
+
 function loadTabs() {
-  const tabs = JSON.parse(localStorage.getItem("searchTabs") || "[]");
   const tabList = document.getElementById("tabList");
+  const tabs = JSON.parse(localStorage.getItem("tabs") || "[]");
   tabList.innerHTML = "";
-  tabs.forEach((tab, i) => {
-    const tabEl = document.createElement("div");
-    tabEl.className = "tab";
-    tabEl.innerHTML = `<span>${tab}</span><button class="close-tab" data-index="${i}">&times;</button>`;
-    tabEl.querySelector("span").addEventListener("click", () => {
-      document.getElementById("query").value = tab;
+  tabs.forEach(query => {
+    const tab = document.createElement("div");
+    tab.className = "tab";
+    tab.textContent = query;
+    tab.onclick = () => {
+      document.getElementById("query").value = query;
       document.getElementById("searchForm").dispatchEvent(new Event("submit"));
-    });
-    tabEl.querySelector(".close-tab").addEventListener("click", (e) => {
+    };
+
+    const close = document.createElement("button");
+    close.className = "close-tab";
+    close.innerHTML = "&times;";
+    close.onclick = (e) => {
       e.stopPropagation();
-      deleteTab(i);
-    });
-    tabList.appendChild(tabEl);
+      deleteTab(query);
+    };
+
+    tab.appendChild(close);
+    tabList.appendChild(tab);
   });
 }
 
-function deleteTab(index) {
-  const tabs = JSON.parse(localStorage.getItem("searchTabs") || "[]");
-  tabs.splice(index, 1);
-  localStorage.setItem("searchTabs", JSON.stringify(tabs));
-  loadTabs();
+function deleteTab(query) {
+  let tabs = JSON.parse(localStorage.getItem("tabs") || "[]");
+  tabs = tabs.filter(t => t !== query);
+  localStorage.setItem("tabs", JSON.stringify(tabs));
+  renderTabs();
 }
 
 function clearTabs() {
-  localStorage.removeItem("searchTabs");
+  localStorage.removeItem("tabs");
+  renderTabs();
+}
+
+function renderTabs() {
   loadTabs();
 }
 
-function saveTab(query) {
-  const tabs = JSON.parse(localStorage.getItem("searchTabs") || "[]");
-  if (!tabs.includes(query)) {
-    tabs.push(query);
-    localStorage.setItem("searchTabs", JSON.stringify(tabs));
-    loadTabs();
-  }
+function saveLastQuery(query) {
+  localStorage.setItem("lastQuery", query);
 }
 
-document.getElementById("toggleTabs").addEventListener("click", () => {
-  const panel = document.getElementById("tabsPanel");
-  panel.style.display = panel.style.display === "block" ? "none" : "block";
-});
-
-document.getElementById("clearTabs").addEventListener("click", clearTabs);
-
-document.getElementById("addTab").addEventListener("click", () => {
-  const query = prompt("Name your new tab:");
-  if (query) {
-    saveTab(query.trim());
+function loadLastQuery() {
+  const last = localStorage.getItem("lastQuery");
+  if (last) {
+    document.getElementById("query").value = last;
   }
-});
-
-loadTabs();
+}
