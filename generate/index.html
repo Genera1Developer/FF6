@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gemini 2.0 Chat</title>
+  <style>
+    html {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background-image: linear-gradient(to bottom, #6866FE, #FD6666);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    .head h1, .head p, p, h1 {
+      text-align: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .signup {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 600px;
+      margin: 30px auto;
+      box-sizing: border-box;
+    }
+
+    .signup form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .signup input[type="text"] {
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      font-size: 16px;
+      background-color: #f2f2f2;
+      color: #333;
+      box-sizing: border-box;
+    }
+
+    .signup button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .signup button:hover {
+      background-color: #007b8a;
+    }
+
+    #chatContainer {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      box-sizing: border-box;
+    }
+
+    .message {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      white-space: pre-wrap;
+    }
+
+    .user {
+      background-color: rgba(0, 0, 0, 0.3);
+      text-align: right;
+    }
+
+    .ai {
+      background-color: rgba(255, 255, 255, 0.2);
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="head">
+    <h1>Generate</h1>
+    <p><i>"If this AI goes rogue...  Tell the government the pope did it, not me!"</i>></p>
+  </div>
+
+  <div class="signup">
+    <form id="chatForm">
+      <input type="text" id="userInput" placeholder="Say something..." autocomplete="off">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <div id="chatContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
